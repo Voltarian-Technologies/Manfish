@@ -1,173 +1,133 @@
 """
-User data persistence layer using JSON files
-Atomic writes with per-user locks to prevent corruption
+Data persistence - User data loading and saving
 """
 
 import json
 import os
-import asyncio
-from typing import Dict, Any, Optional
-from datetime import datetime
+from typing import Dict, Any
 
-DATA_DIR = 'data'
-_user_locks: Dict[str, asyncio.Lock] = {}
+DATA_DIR = os.path.join(os.path.dirname(__file__), '..', '..', 'data', 'users')
 
 def ensure_data_dir():
     """Ensure the data directory exists"""
     os.makedirs(DATA_DIR, exist_ok=True)
 
-def get_user_filepath(user_id: int) -> str:
-    """Get the filepath for a user's data file"""
+def get_user_file_path(user_id: int) -> str:
+    """Get the file path for a user's data"""
     return os.path.join(DATA_DIR, f"{user_id}.json")
 
-def get_user_lock(user_id: int) -> asyncio.Lock:
-    """Get or create a lock for a specific user"""
-    if user_id not in _user_locks:
-        _user_locks[user_id] = asyncio.Lock()
-    return _user_locks[user_id]
-
-def create_default_user_data(user_id: int, username: str) -> Dict[str, Any]:
-    """Create default user data structure"""
-    return {
-        'id': str(user_id),
-        'username': username,
-        'currency': 0,
-        'rod': {
-            'tier': 'Starter Rod',
-            'level': 1
-        },
-        'axe': {
-            'tier': 'Starter Axe',
-            'level': 1
-        },
-        'upgrades': {
-            'hookSharpness': 0,
-            'lineStrength': 0,
-            'bladeSharpness': 0,
-            'handleStrength': 0
-        },
-        'stats': {
-            'totalCatches': 0,
-            'lastFishTimestamp': 0,
-            'totalChops': 0,
-            'lastChopTimestamp': 0
-        },
-        'inventory': {
-            'Common': {},
-            'Uncommon': {},
-            'Rare': {},
-            'Epic': {},
-            'Legendary': {},
-            'Mythic': {},
-            'woodcutting': {
+async def load_user_data(user_id: int, username: str = None) -> Dict[str, Any]:
+    """Load user data, creating default if doesn't exist"""
+    ensure_data_dir()
+    file_path = get_user_file_path(user_id)
+    
+    if not os.path.exists(file_path):
+        # Create default user data
+        user_data = {
+            'user_id': user_id,
+            'username': username or f"User{user_id}",
+            'currency': 0,
+            'rod': {
+                'tier': 'Starter Rod',
+                'level': 1
+            },
+            'axe': {
+                'tier': 'Starter Axe'
+            },
+            'upgrades': {
+                'hookSharpness': 0,
+                'lineStrength': 0,
+                'bladeSharpness': 0,
+                'handleStrength': 0
+            },
+            'inventory': {
                 'Common': {},
                 'Uncommon': {},
                 'Rare': {},
                 'Epic': {},
                 'Legendary': {},
-                'Mythic': {}
+                'Mythic': {},
+                'woodcutting': {}
+            },
+            'stats': {
+                'totalCatches': 0,
+                'totalChops': 0,
+                'lastFishTimestamp': 0,
+                'lastChopTimestamp': 0
             }
         }
-    }
-
-async def load_user_data(user_id: int, username: str) -> Dict[str, Any]:
-    """
-    Load user data from JSON file
-    Creates default data if file doesn't exist
-    """
-    ensure_data_dir()
-    lock = get_user_lock(user_id)
+        await save_user_data(user_id, user_data)
+        return user_data
     
-    async with lock:
-        filepath = get_user_filepath(user_id)
-        
-        if not os.path.exists(filepath):
-            # Create new user data
-            user_data = create_default_user_data(user_id, username)
-            await save_user_data(user_id, user_data, skip_lock=True)
-            return user_data
-        
-        try:
-            with open(filepath, 'r', encoding='utf-8') as f:
-                user_data = json.load(f)
-                # Update username if changed
-                user_data['username'] = username
-                return user_data
-        except (json.JSONDecodeError, IOError) as e:
-            print(f"⚠️ Error loading user {user_id} data: {e}")
-            print(f"Creating backup and resetting user data...")
+    try:
+        with open(file_path, 'r', encoding='utf-8') as f:
+            data = json.load(f)
+            # Ensure all required fields exist
+            data.setdefault('user_id', user_id)
+            data.setdefault('username', username or f"User{user_id}")
+            data.setdefault('currency', 0)
+            data.setdefault('rod', {'tier': 'Starter Rod', 'level': 1})
+            data.setdefault('axe', {'tier': 'Starter Axe'})
+            data.setdefault('upgrades', {})
+            data.setdefault('inventory', {
+                'Common': {}, 'Uncommon': {}, 'Rare': {}, 'Epic': {},
+                'Legendary': {}, 'Mythic': {}, 'woodcutting': {}
+            })
+            data.setdefault('stats', {
+                'totalCatches': 0, 'totalChops': 0,
+                'lastFishTimestamp': 0, 'lastChopTimestamp': 0
+            })
             
-            # Backup corrupted file
-            backup_file = f"{filepath}.backup.{int(datetime.now().timestamp())}"
-            try:
-                os.rename(filepath, backup_file)
-            except:
-                pass
-            
-            # Return default data
-            user_data = create_default_user_data(user_id, username)
-            await save_user_data(user_id, user_data, skip_lock=True)
-            return user_data
+            # Update username if provided
+            if username and username != data['username']:
+                data['username'] = username
+                await save_user_data(user_id, data)
+                
+            return data
+    except Exception as e:
+        print(f"Error loading user data for {user_id}: {e}")
+        # Return default data
+        return await load_user_data(user_id, username)
 
-async def save_user_data(user_id: int, data: Dict[str, Any], skip_lock: bool = False):
-    """
-    Save user data to JSON file atomically
-    Uses temp file + rename to prevent corruption
-    """
-    ensure_data_dir()
-    
-    async def _save():
-        filepath = get_user_filepath(user_id)
-        temp_filepath = filepath + '.tmp'
+async def save_user_data(user_id: int, user_data: Dict[str, Any]) -> bool:
+    """Save user data to file"""
+    try:
+        ensure_data_dir()
+        file_path = get_user_file_path(user_id)
         
-        try:
-            # Write to temp file
-            with open(temp_filepath, 'w', encoding='utf-8') as f:
-                json.dump(data, f, indent=2)
-            
-            # Atomic rename
-            os.replace(temp_filepath, filepath)
-        except Exception as e:
-            print(f"❌ Error saving user {user_id} data: {e}")
-            # Clean up temp file if it exists
-            if os.path.exists(temp_filepath):
-                try:
-                    os.remove(temp_filepath)
-                except:
-                    pass
-    
-    if skip_lock:
-        await _save()
-    else:
-        lock = get_user_lock(user_id)
-        async with lock:
-            await _save()
-
-async def get_all_user_files() -> list:
-    """Get all user data files"""
-    ensure_data_dir()
-    files = []
-    
-    for filename in os.listdir(DATA_DIR):
-        if filename.endswith('.json') and not filename.endswith('.tmp'):
-            filepath = os.path.join(DATA_DIR, filename)
-            files.append(filepath)
-    
-    return files
+        # Make a clean copy without any non-serializable objects
+        clean_data = {}
+        for key, value in user_data.items():
+            if isinstance(value, dict):
+                clean_data[key] = {k: v for k, v in value.items()}
+            else:
+                clean_data[key] = value
+        
+        with open(file_path, 'w', encoding='utf-8') as f:
+            json.dump(clean_data, f, indent=2, ensure_ascii=False)
+        return True
+    except Exception as e:
+        print(f"Error saving user data for {user_id}: {e}")
+        return False
 
 async def load_all_users() -> Dict[int, Dict[str, Any]]:
-    """Load all user data (for leaderboards)"""
+    """Load all user data files"""
+    ensure_data_dir()
     users = {}
-    files = await get_all_user_files()
     
-    for filepath in files:
-        try:
-            with open(filepath, 'r', encoding='utf-8') as f:
-                data = json.load(f)
-                user_id = int(data['id'])
-                users[user_id] = data
-        except Exception as e:
-            print(f"⚠️ Error loading {filepath}: {e}")
-            continue
+    if not os.path.exists(DATA_DIR):
+        return users
+    
+    for filename in os.listdir(DATA_DIR):
+        if filename.endswith('.json'):
+            try:
+                user_id = int(filename[:-5])  # Remove .json
+                file_path = os.path.join(DATA_DIR, filename)
+                with open(file_path, 'r', encoding='utf-8') as f:
+                    user_data = json.load(f)
+                    users[user_id] = user_data
+            except (ValueError, json.JSONDecodeError) as e:
+                print(f"Error loading {filename}: {e}")
+                continue
     
     return users
