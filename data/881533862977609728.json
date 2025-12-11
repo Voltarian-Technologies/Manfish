@@ -1,0 +1,50 @@
+{
+  "id": "881533862977609728",
+  "username": "Voltaccept, The Lone Drifter",
+  "currency": 2099,
+  "rod": {
+    "tier": "Yeti Rod",
+    "level": 6
+  },
+  "axe": {
+    "tier": "Starter Axe",
+    "level": 1
+  },
+  "upgrades": {
+    "hookSharpness": 0,
+    "lineStrength": 0,
+    "bladeSharpness": 0,
+    "handleStrength": 0
+  },
+  "stats": {
+    "totalCatches": 534,
+    "lastFishTimestamp": 1764588929,
+    "totalChops": 9,
+    "lastChopTimestamp": 1764591098
+  },
+  "inventory": {
+    "Common": {},
+    "Uncommon": {},
+    "Rare": {},
+    "Epic": {},
+    "Legendary": {},
+    "Mythic": {},
+    "woodcutting": {
+      "Common": {
+        "birch": 1,
+        "oak": 3
+      },
+      "Uncommon": {
+        "ash": 1,
+        "maple": 2
+      },
+      "Rare": {},
+      "Epic": {
+        "bloodwood": 1,
+        "honeywood": 1
+      },
+      "Legendary": {},
+      "Mythic": {}
+    }
+  }
+}

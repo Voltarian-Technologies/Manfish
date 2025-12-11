@@ -1,0 +1,49 @@
+{
+  "fish": {
+    "cod_common": "<:cod:1444141250507702324>",
+    "herring_common": "<:herring:1444144547742482604>",
+    "trout_uncommon": "<:trout:1444141252894523414>",
+    "bass_uncommon": "<:bass:1444144546970603550>",
+    "shrimp_rare": "<:shrimp:1444141706395254864>",
+    "puffer_rare": "<:pufferfish:1444142115276722288>",
+    "bloodborn_epic": "<:blood:1444141248108695644>",
+    "candy_epic": "<:candy:1444141249442611270>",
+    "spookster_legendary": "<:spooky:1444141251803742340>",
+    "priceless_mythic": "<a:priceless:1444143814892589157>"
+  },
+  "logs": {
+    "oak_common": "<:oak:1444904694492303391>",
+    "birch_common": "<:birch:1444904693070303363>",
+    "maple_uncommon": "<:acacia:1444904692252414129>",
+    "ashwood_uncommon": "<:shadowbark:1444904695029305417>",
+    "spruce_rare": "<:spruce:1444904696413294622>",
+    "pine_rare": "<:spruce:1444904696413294622>",
+    "bloodwood_epic": "<:bloodwood:1444904693821345822>",
+    "honeywood_epic": "<:oak:1444904694492303391>",
+    "shadowbark_legendary": "<:shadowbark:1444904695029305417>",
+    "angelwood_mythic": "<:angelwood:1445023777418117173>"
+  },
+  "rods": {
+    "starter rod": "<:fishing_rod:1443784011213443153>",
+    "speedster rod": "<:speedster_rod:1443784778733326408>",
+    "challenge rod": "<:challenge_rod:1443784008810102974>",
+    "legend rod": "<:legend_rod:1443784012148641873>",
+    "rod of the sea": "<:rod_of_the_sea:1443784013167984711>",
+    "yeti rod": "<:yeti_rod:1444406938937852016>",
+    "bingo rod":"<:bingo_rod:1444406937151344760>",
+    "bingo rod tier 2":"<:bingo_rod_t2:1444406938031882270>"
+  },
+  "axes": {
+    "starter axe": "<:rookie_axe:1444905853877616731>",
+    "speedster axe": "<:decent_axe:1444905851147124828>",
+    "challenge axe": "<:efficient_axe:1444905852036452553>",
+    "legend axe": "<:promising_axe:1444905852854206558>",
+    "axe of the forest": "<:silva_dominus:1444906277364039763>",
+    "yeti axe": "<:promising_axe:1444905852854206558>",
+    "bingo axe":"<:bingaxe:1444905849955815547>",
+    "bingo axe tier 2":"<:bingaxe:1444905849955815547>"
+  },
+  "misc": {
+    "currency": "<:chum:1443784009745432576>"
+  }
+}

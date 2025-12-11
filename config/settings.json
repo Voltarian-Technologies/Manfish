@@ -1,0 +1,7 @@
+{
+  "currencyName": "Chum",
+  "fishCooldown": 5,
+  "chopCooldown": 5,
+  "goldenBiteChance": 0.05,
+  "goldenBiteMultiplier": 2
+}

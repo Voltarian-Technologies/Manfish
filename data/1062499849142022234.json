@@ -1,0 +1,41 @@
+{
+  "id": "1062499849142022234",
+  "username": "JCracker5",
+  "currency": 0,
+  "rod": {
+    "tier": "Starter Rod",
+    "level": 1
+  },
+  "axe": {
+    "tier": "Starter Axe",
+    "level": 1
+  },
+  "upgrades": {
+    "hookSharpness": 0,
+    "lineStrength": 0,
+    "bladeSharpness": 0,
+    "handleStrength": 0
+  },
+  "stats": {
+    "totalCatches": 0,
+    "lastFishTimestamp": 0,
+    "totalChops": 0,
+    "lastChopTimestamp": 0
+  },
+  "inventory": {
+    "Common": {},
+    "Uncommon": {},
+    "Rare": {},
+    "Epic": {},
+    "Legendary": {},
+    "Mythic": {},
+    "woodcutting": {
+      "Common": {},
+      "Uncommon": {},
+      "Rare": {},
+      "Epic": {},
+      "Legendary": {},
+      "Mythic": {}
+    }
+  }
+}

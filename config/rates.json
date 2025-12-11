@@ -1,0 +1,166 @@
+{
+  "rodTiers": {
+    "Starter Rod": {
+      "weights": {
+        "Common": 60,
+        "Uncommon": 25,
+        "Rare": 10,
+        "Epic": 3,
+        "Legendary": 1.5,
+        "Mythic": 0.5
+      }
+    },
+    "Speedster Rod": {
+      "weights": {
+        "Common": 50,
+        "Uncommon": 30,
+        "Rare": 13,
+        "Epic": 5,
+        "Legendary": 1.8,
+        "Mythic": 0.2
+      }
+    },
+    "Challenge Rod": {
+      "weights": {
+        "Common": 40,
+        "Uncommon": 35,
+        "Rare": 15,
+        "Epic": 7,
+        "Legendary": 2.5,
+        "Mythic": 0.5
+      }
+    },
+    "Legend Rod": {
+      "weights": {
+        "Common": 30,
+        "Uncommon": 35,
+        "Rare": 20,
+        "Epic": 10,
+        "Legendary": 4,
+        "Mythic": 1
+      }
+    },
+    "Rod of The Sea": {
+      "weights": {
+        "Common": 20,
+        "Uncommon": 30,
+        "Rare": 25,
+        "Epic": 15,
+        "Legendary": 7,
+        "Mythic": 3
+      }
+    },
+    "Yeti Rod": {
+      "weights": {
+        "Common": 15,
+        "Uncommon": 30,
+        "Rare": 20,
+        "Epic": 15,
+        "Legendary": 8,
+        "Mythic": 4
+      }
+    },
+    "Bingo Rod": {
+      "weights": {
+        "Common": 10,
+        "Uncommon": 25,
+        "Rare": 24,
+        "Epic": 17,
+        "Legendary": 9,
+        "Mythic": 5
+      }
+    },
+    "Bingo Rod Tier 2": {
+      "weights": {
+        "Common": 2,
+        "Uncommon": 3,
+        "Rare": 25,
+        "Epic": 27,
+        "Legendary": 10,
+        "Mythic": 7
+      }
+    }
+  },
+  "axeTiers": {
+    "Starter Axe": {
+      "weights": {
+        "Common": 60,
+        "Uncommon": 25,
+        "Rare": 10,
+        "Epic": 3,
+        "Legendary": 1.5,
+        "Mythic": 0.5
+      }
+    },
+    "Speedster Axe": {
+      "weights": {
+        "Common": 50,
+        "Uncommon": 30,
+        "Rare": 13,
+        "Epic": 5,
+        "Legendary": 1.8,
+        "Mythic": 0.2
+      }
+    },
+    "Challenge Axe": {
+      "weights": {
+        "Common": 40,
+        "Uncommon": 35,
+        "Rare": 15,
+        "Epic": 7,
+        "Legendary": 2.5,
+        "Mythic": 0.5
+      }
+    },
+    "Legend Axe": {
+      "weights": {
+        "Common": 30,
+        "Uncommon": 35,
+        "Rare": 20,
+        "Epic": 10,
+        "Legendary": 4,
+        "Mythic": 1
+      }
+    },
+    "Axe of the Forest": {
+      "weights": {
+        "Common": 20,
+        "Uncommon": 30,
+        "Rare": 25,
+        "Epic": 15,
+        "Legendary": 7,
+        "Mythic": 3
+      }
+    },
+    "Yeti Axe": {
+      "weights": {
+        "Common": 15,
+        "Uncommon": 30,
+        "Rare": 20,
+        "Epic": 15,
+        "Legendary": 8,
+        "Mythic": 4
+      }
+    },
+    "Bingo Axe": {
+      "weights": {
+        "Common": 10,
+        "Uncommon": 25,
+        "Rare": 24,
+        "Epic": 17,
+        "Legendary": 9,
+        "Mythic": 5
+      }
+    },
+    "Bingo Axe Tier 2": {
+      "weights": {
+        "Common": 2,
+        "Uncommon": 3,
+        "Rare": 25,
+        "Epic": 27,
+        "Legendary": 10,
+        "Mythic": 7
+      }
+    }
+  }
+}

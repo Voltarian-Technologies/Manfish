@@ -1,0 +1,35 @@
+"currency": 13239,
+  "rod": {
+    "tier": "Legend Rod",
+    "level": 4
+  },
+  "upgrades": {
+    "hookSharpness": 1,
+    "lineStrength": 1
+  },
+  "stats": {
+    "totalCatches": 170,
+    "lastFishTimestamp": 1764443240
+  },
+  "inventory": {
+    "Common": {
+      "herring": 6,
+      "cod": 4
+    },
+    "Uncommon": {
+      "bass": 12,
+      "trout": 9
+    },
+    "Rare": {
+      "shrimp": 1,
+      "puffer": 1
+    },
+    "Epic": {
+      "bloodborn": 3,
+      "candy": 1
+    },
+    "Legendary": {
+      "spookster": 2
+    },
+    "Mythic": {}
+  }

@@ -1,0 +1,26 @@
+{
+  "logValues": {
+    "oak": 10,
+    "birch": 12,
+    "maple": 25,
+    "ashwood": 30,
+    "spruce": 50,
+    "pine": 55,
+    "bloodwood": 120,
+    "honeywood": 150,
+    "shadowbark": 300,
+    "angelwood": 1000
+  },
+  "fishValues": {
+    "cod": 8,
+    "herring": 9,
+    "trout": 20,
+    "bass": 22,
+    "shrimp": 45,
+    "puffer": 48,
+    "bloodborn": 100,
+    "candy": 130,
+    "spookster": 250,
+    "priceless": 800
+  }
+}
